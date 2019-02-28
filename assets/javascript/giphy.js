@@ -3,7 +3,13 @@
 var topics=["John Krasinski","Al Pachino","Cate Blanchett","Melissa McCarthy","Tessa Thompson","Tom Hanks"];
 
 // Create Intial For loop to put original array on the page
-var buttons = $('<button class="button" ></button>')
+
+function makeButton(n){
+  var b = $('<button class="button" ></button>');
+  b.text(n)
+  return(b);
+}
+
 for  (var i=0;i<topics.length;i++){
  var buttons = $('<button class="button" ></button>')
  buttons.text(topics[i]);
@@ -14,9 +20,10 @@ for  (var i=0;i<topics.length;i++){
 $("#submit").on('click',function(){
   event.preventDefault();
   var name= $("#actorName").val()
-  buttons.text(name)
+  var actorButton= makeButton(name)
   topics.push(name)
-  updateButtons();
+  // updateButtons();
+  $("#buttonArea").append(actorButton)
 })
 
 //function that updates the for loop and displays new array as buttons 
@@ -38,7 +45,7 @@ var xhr = $.get("http://api.giphy.com/v1/gifs/search?q=Tom+Hanks&api_key=P4dbHw4
 
 
 var gif;
-$('#buttonArea button').on('click',function(){
+$(document).on('click', '#buttonArea button', function(){
   $("#gifs").empty();
   var actor =$(this).text()
   var queryURL = "http://api.giphy.com/v1/gifs/search?q="+actor+"&api_key=P4dbHw4FdiQldzFx33jULsJgBWuNGhDz&limit=10"

@@ -17,22 +17,19 @@ for  (var i=0;i<topics.length;i++){
 }
 
 //forum to add a new actor 
-$("#submit").on('click',function(){
+$("#actorName").on('keypress',function(e){
+  if (e.which ===13){
   event.preventDefault();
   var name= $("#actorName").val()
   var actorButton= makeButton(name)
   topics.push(name)
-  // updateButtons();
+
   $("#buttonArea").append(actorButton)
+  }
 })
 
-//function that updates the for loop and displays new array as buttons 
-function updateButtons(){
-  for  (var i=0;i<topics.length;i++){
-    buttons.text(topics[i]);
-    $("#buttonArea").append(buttons)
-}
-}
+
+// }
 
 var xhr = $.get("http://api.giphy.com/v1/gifs/search?q=Tom+Hanks&api_key=P4dbHw4FdiQldzFx33jULsJgBWuNGhDz&limit=10");
 // xhr.done(function(data) { console.log("success got data", data); })
